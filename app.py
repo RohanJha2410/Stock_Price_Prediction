@@ -106,25 +106,37 @@ if predict_button:
     # ------------------------------------------------
     # Interactive Plot
     # ------------------------------------------------
+    import pandas as pd
+
+    # Historical dates
+    historical_dates = data.index
+
+    # Create future 30 business dates
+    future_dates = pd.date_range(
+        start=historical_dates[-1] + pd.Timedelta(days=1),
+        periods=30,
+        freq='B'  # Business days
+    )
+
+    # Combine dates
+    all_dates = historical_dates.append(future_dates)
+
     fig = go.Figure()
 
-    # Historical + Forecast line
     fig.add_trace(go.Scatter(
+        x=all_dates,
         y=final_graph.flatten(),
         mode='lines',
-        name='Historical + Forecast',
-        line=dict(width=2)
+        name='Historical + Forecast'
     ))
 
-    # Vertical forecast start
     fig.add_vline(
-        x=len(ds_scaled),
+        x=historical_dates[-1],
         line_dash="dash",
         line_color="orange",
         annotation_text="Forecast Start"
     )
 
-    # Horizontal predicted level
     fig.add_hline(
         y=predicted_price,
         line_dash="dot",
@@ -134,11 +146,14 @@ if predict_button:
 
     fig.update_layout(
         title=f"{stock_symbol} - 30 Day LSTM Forecast",
-        xaxis_title="Time",
+        xaxis_title="Date",
         yaxis_title="Price",
         template="plotly_dark",
         height=600
     )
+
+
+
 
     st.plotly_chart(fig, use_container_width=True)
 
