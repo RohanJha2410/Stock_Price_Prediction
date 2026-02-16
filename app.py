@@ -130,19 +130,43 @@ if predict_button:
         name='Historical + Forecast'
     ))
 
-    fig.add_vline(
-        x=historical_dates[-1],
-        line_dash="dash",
-        line_color="orange",
-        annotation_text="Forecast Start"
+   # Vertical Forecast Start Line (SAFE)
+    fig.add_shape(
+        type="line",
+        x0=str(historical_dates[-1]),
+        x1=str(historical_dates[-1]),
+        y0=float(final_graph.min()),
+        y1=float(final_graph.max()),
+        line=dict(color="orange", dash="dash")
     )
 
-    fig.add_hline(
-        y=predicted_price,
-        line_dash="dot",
-        line_color="red",
-        annotation_text=f"30D Target: ₹ {round(predicted_price,2)}"
+    fig.add_annotation(
+        x=str(historical_dates[-1]),
+        y=float(final_graph.max()),
+        text="Forecast Start",
+        showarrow=False,
+        yshift=10
     )
+
+    # Horizontal Target Line (SAFE)
+    fig.add_shape(
+        type="line",
+        x0=str(all_dates[0]),
+        x1=str(all_dates[-1]),
+        y0=predicted_price,
+        y1=predicted_price,
+        line=dict(color="red", dash="dot")
+    )
+
+    fig.add_annotation(
+        x=str(all_dates[-1]),
+        y=predicted_price,
+        text=f"30D Target: ₹ {round(predicted_price,2)}",
+        showarrow=False,
+        yshift=10
+    )
+
+
 
     fig.update_layout(
         title=f"{stock_symbol} - 30 Day LSTM Forecast",
