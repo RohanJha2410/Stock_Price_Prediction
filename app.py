@@ -130,7 +130,7 @@ if predict_button:
         name='Historical + Forecast'
     ))
 
-   # Vertical Forecast Start Line (SAFE)
+# Vertical Forecast Start Line (SAFE)
     fig.add_shape(
         type="line",
         x0=str(historical_dates[-1]),
@@ -166,8 +166,6 @@ if predict_button:
         yshift=10
     )
 
-
-
     fig.update_layout(
         title=f"{stock_symbol} - 30 Day LSTM Forecast",
         xaxis_title="Date",
@@ -175,6 +173,13 @@ if predict_button:
         template="plotly_dark",
         height=600
     )
+
+    fig.update_xaxes(
+    rangeslider_visible=True,
+    tickformat="%b %Y",
+    showgrid=True
+)
+
 
 
 
