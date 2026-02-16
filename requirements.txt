@@ -1,0 +1,8 @@
+ipykernel
+pandas
+numpy
+matplotlib
+scikit-learn
+yfinance
+streamlit==1.54.0
+tensorflow==2.20.0
