@@ -167,12 +167,23 @@ if predict_button:
     )
 
     fig.update_layout(
-        title=f"{stock_symbol} - 30 Day LSTM Forecast",
-        xaxis_title="Date",
-        yaxis_title="Price",
-        template="plotly_dark",
-        height=600
+    title=f"{stock_symbol} - 30 Day LSTM Forecast",
+    template="plotly_dark",
+    height=600,
+    hovermode="x unified",
+    margin=dict(l=40, r=40, t=60, b=80),
+    xaxis=dict(
+        title=dict(text="Date", standoff=15),
+        type="date",
+        rangeslider=dict(visible=True),
+        showgrid=False
+    ),
+    yaxis=dict(
+        title="Price",
+        showgrid=True
     )
+)
+
 
     fig.update_xaxes(
     rangeslider_visible=True,
