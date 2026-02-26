@@ -92,9 +92,33 @@ html, body, [class*="css"] {
     z-index: 1;
 }
 
-#MainMenu, footer, header,
-.stDeployButton, [data-testid="stToolbar"],
+#MainMenu, footer,
+.stDeployButton,
 [data-testid="stDecoration"] { display: none !important; }
+
+/* Keep sidebar toggle always visible */
+header { background: transparent !important; }
+[data-testid="stSidebarCollapsedControl"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    top: 0.5rem !important;
+    left: 0.5rem !important;
+    z-index: 9999 !important;
+}
+[data-testid="stSidebarCollapsedControl"] button {
+    background: rgba(0,200,255,0.1) !important;
+    border: 1px solid rgba(0,200,255,0.25) !important;
+    border-radius: 6px !important;
+    color: #00c8ff !important;
+    width: 2rem !important;
+    height: 2rem !important;
+}
+[data-testid="stSidebarCollapsedControl"] button:hover {
+    background: rgba(0,200,255,0.2) !important;
+    box-shadow: 0 0 12px rgba(0,200,255,0.3) !important;
+}
 
 .block-container {
     padding: 0 2rem 3rem 2rem !important;
